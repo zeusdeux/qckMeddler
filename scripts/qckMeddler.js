@@ -11,8 +11,9 @@ Link   : http://opensource.org/licenses/gpl-3.0.html
 window.onload = function() {
 	_dimensioner();
 	__live_updater.iframe = document.getElementsByTagName('iframe')[0].contentWindow.document;
+	__live_updater.iframe_head_pureJS = (__live_updater.iframe).getElementsByTagName('head')[0];
+	__live_updater.iframe_body = (__live_updater.iframe).getElementsByTagName('body')[0];
 	__live_updater.iframe_head = $('iframe').contents().find('head');
-	__live_updater.iframe_body = $('iframe').contents().find('body');
 	$('textarea').keyup(function() {
 		__live_updater();
 	});
@@ -50,17 +51,15 @@ function __live_updater() {
 	(__live_updater.iframe_head).append('<style>' + css_content + '</style>');
 
 	//append html
-	(__live_updater.iframe_body).html(html_content);
-	//javascript equivalent of above statement is :
-	//document.getElementsByTagName('iframe')[0].contentWindow.document.getElementsByTagName('body')[0].innerHTML = "<p>test</p>"
+	(__live_updater.iframe_body).innerHTML = html_content;
 	
 	//append jQuery
 	var jquery_script = (__live_updater.iframe).createElement('script');
 	jquery_script.src = "scripts/jquery-1.8.1.min.js";
-	(__live_updater.iframe).getElementsByTagName('head')[0].appendChild(jquery_script);
+	(__live_updater.iframe_head_pureJS).appendChild(jquery_script);
 
 	//append custom javascript
 	var custom_script = (__live_updater.iframe).createElement('script');
-	(__live_updater.iframe).getElementsByTagName('head')[0].appendChild(custom_script);
+	(__live_updater.iframe_head_pureJS).appendChild(custom_script);
 	(__live_updater.iframe).getElementsByTagName('script')[1].innerHTML = js_content;
 }
