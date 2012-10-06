@@ -1,3 +1,6 @@
+body {
+	font-family: sans-serif;
+}
 #main_container {
 	width:100%;
 	overflow: hidden;
