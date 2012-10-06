@@ -7,4 +7,4 @@ A live HTML, CSS & Javascript editor.
    
 qckMeddler lets you see your code changes *visualized live* in the output window.  
 It is currently in its alpha stage. More features like multiple framework support  
-is in the pipeline.
+are in the pipeline.
