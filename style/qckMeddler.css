@@ -1,0 +1,40 @@
+#main_container {
+	width:100%;
+	overflow: hidden;
+}
+
+#qckMeddler_container {
+	width: 90%;
+	margin: auto;
+	overflow: hidden;
+	padding-top: 5px;
+}
+
+#qckMeddler_container > div > textarea {
+	resize: none;
+	width: 294px;
+	height: 296px;
+	white-space: nowrap;
+}
+
+#qckMeddler_output_frame {
+	border: 1px solid #afafaf;
+	overflow: auto;
+	width:300px;
+	height: 300px;
+}
+
+
+
+.breathe{
+	margin-right: 20px;
+	margin-bottom: 20px;
+}
+
+.left {
+	float: left;
+}
+
+.clear {
+	clear: both;
+}
