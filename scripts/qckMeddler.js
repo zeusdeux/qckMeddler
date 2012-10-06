@@ -29,7 +29,7 @@ Link   : http://opensource.org/licenses/gpl-3.0.html
 		var qckMeddler_height = document.getElementById('qckMeddler_container').offsetHeight - 40,
 			qckMeddler_width = document.getElementById('qckMeddler_container').offsetWidth - 20;
 		//console.log("Height: " + qckMeddler_height + " Width:" + qckMeddler_width);
-		$('#qckMeddler_container > div > textarea').css({
+		$('textarea').css({
 			'height': ((qckMeddler_height / 2) - 35) + "px",
 			'width': ((qckMeddler_width / 2) - 8) + "px"
 		});
