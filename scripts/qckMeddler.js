@@ -39,7 +39,6 @@ function _dimensioner() {
 }
 
 function __live_updater() {
-
 	var css_content = $('#qckMeddler_css_content').val();
 	var js_content = $('#qckMeddler_js_content').val();
 	var html_content = $('#qckMeddler_html_content').val();
@@ -52,7 +51,7 @@ function __live_updater() {
 
 	//append html
 	(__live_updater.iframe_body).innerHTML = html_content;
-	
+
 	//append jQuery
 	var jquery_script = (__live_updater.iframe).createElement('script');
 	jquery_script.src = "scripts/jquery-1.8.1.min.js";
