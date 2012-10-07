@@ -11,12 +11,27 @@ Link   : http://opensource.org/licenses/gpl-3.0.html
 	"use strict";
 	window.onload = function() {
 		_dimensioner();
+
+		//caching required DOM references
 		__live_updater.iframe = document.getElementsByTagName('iframe')[0].contentWindow.document;
-		__live_updater.iframe_head_pureJS = (__live_updater.iframe).getElementsByTagName('head')[0];
+		__live_updater.iframe_head = (__live_updater.iframe).getElementsByTagName('head')[0];
 		__live_updater.iframe_body = (__live_updater.iframe).getElementsByTagName('body')[0];
-		__live_updater.iframe_head = $('iframe').contents().find('head');
-		$('textarea').keyup(function() {
-			__live_updater();
+
+		//append style tag to hold custom styles
+		__live_updater.iframe_style = (__live_updater.iframe_head).appendChild((__live_updater.iframe).createElement('style'));
+
+		//append jQuery
+		var jquery_script = (__live_updater.iframe).createElement('script');
+		jquery_script.src = "scripts/jquery-1.8.1.min.js";
+		(__live_updater.iframe_head).appendChild(jquery_script);
+
+		//append script tag to hold custom javascript code
+		__live_updater.iframe_script = (__live_updater.iframe_head).appendChild((__live_updater.iframe).createElement('script'));
+
+		$('textarea').keyup(function(e) {
+			if(!(e.keyCode >= 9 && e.keyCode <= 45) && !(e.keyCode >= 112 && e.keyCode <= 145)) {
+				__live_updater($(this));
+			}
 		});
 		$('textarea').keydown(function(e) {
 			if(e.keyCode == 9) { //tab pressed
@@ -39,28 +54,27 @@ Link   : http://opensource.org/licenses/gpl-3.0.html
 		});
 	}
 
-	function __live_updater() {
+	function __live_updater(t) {
 		var css_content = $('#qckMeddler_css_content').val(),
 			js_content = $('#qckMeddler_js_content').val(),
 			html_content = $('#qckMeddler_html_content').val(),
-			jquery_script = (__live_updater.iframe).createElement('script'),
-			custom_script = (__live_updater.iframe).createElement('script');
+			code_type = t.data('code');
 
-		//empty the head tag contents
-		(__live_updater.iframe_head).empty();
+		if(code_type === "html" || code_type === "js") {
 
-		//append css content
-		($('<style></style>').appendTo(__live_updater.iframe_head)).text(css_content);
+			//append html
+			(__live_updater.iframe_body).innerHTML = html_content;
 
-		//append html
-		(__live_updater.iframe_body).innerHTML = html_content;
+			//append custom javascript
+			(__live_updater.iframe_head).removeChild(__live_updater.iframe_script);
+			__live_updater.iframe_script = (__live_updater.iframe_head).appendChild((__live_updater.iframe).createElement('script'));
+			(__live_updater.iframe_script).textContent = js_content;
 
-		//append jQuery
-		jquery_script.src = "scripts/jquery-1.8.1.min.js";
-		(__live_updater.iframe_head_pureJS).appendChild(jquery_script);
+		} else if(code_type === "css") {
 
-		//append custom javascript
-		(__live_updater.iframe_head_pureJS).appendChild(custom_script);
-		(__live_updater.iframe).getElementsByTagName('script')[1].innerHTML = js_content;
+			//append css content
+			(__live_updater.iframe_style).textContent = css_content;
+
+		}
 	}
 })();
