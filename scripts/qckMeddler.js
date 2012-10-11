@@ -68,7 +68,8 @@ Link   : http://opensource.org/licenses/gpl-3.0.html
 			//append custom javascript
 			(__live_updater.iframe_head).removeChild(__live_updater.iframe_script);
 			__live_updater.iframe_script = (__live_updater.iframe_head).appendChild((__live_updater.iframe).createElement('script'));
-			(__live_updater.iframe_script).textContent = js_content;
+
+			(__live_updater.iframe_script).textContent = '//<![CDATA['+"\n"+js_content+"\n"+'//]]>';
 
 		} else if(code_type === "css") {
 
