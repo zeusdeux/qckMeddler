@@ -22,7 +22,7 @@ Link   : http://opensource.org/licenses/gpl-3.0.html
 
 		//append jQuery
 		var jquery_script = (__live_updater.iframe).createElement('script');
-		jquery_script.src = "scripts/jquery-1.8.1.min.js";
+		jquery_script.src = "http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js";
 		(__live_updater.iframe_head).appendChild(jquery_script);
 
 		//append script tag to hold custom javascript code
